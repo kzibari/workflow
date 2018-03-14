@@ -1,0 +1,85 @@
+﻿@model IEnumerable<Workflow.Models.Assignment>
+
+@{
+    ViewBag.Title = "ViewOutstaningTasks";
+}
+
+
+
+
+@if (Model.Count() == 0)
+{
+    <h2>You have no outstanding tasks!</h2>
+}
+else
+{
+    <h2>Your Outstaning Tasks</h2>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Task.Title)
+
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Task.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SetDate)
+
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DueDate)
+            </th>
+
+
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Task.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Task.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SetDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DueDate)
+                </td>
+                <td>
+                    @using (Html.BeginForm("Complete", "Home"))
+                    {
+                        @Html.Hidden("id", item.AssignmentID)
+                        @Html.Hidden("email", item.Employee.Email)
+                        <input type="submit" value="Complete" class="btn btn-primary" />
+
+                    }
+
+
+                </td>
+                <td>
+
+                    @if (item.Employee.Manager == true)
+                    {
+                        using (Html.BeginForm("Refer", "Home"))
+                        {
+                            @Html.Hidden("id", item.AssignmentID)
+                            @Html.Hidden("email", item.Employee.Email)
+                            <input type="submit" value="Refer" class="btn btn-primary" />
+
+                        }
+                    }
+
+
+
+                </td>
+
+            </tr>
+        }
+
+    </table>
+}

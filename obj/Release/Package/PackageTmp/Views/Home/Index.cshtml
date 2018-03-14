@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Login to view your outstaning tasks</h2>
+
+
+
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Get))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+
+    <br />
+    @Html.Label("Enter your email address:", htmlAttributes: new { @class = "control-label" })
+    @Html.TextBox("Email", null, new { type = "email", @class = "form-control", required = "true", placeholder = "user@company.com" })
+
+    <br />
+    <input type="submit" value="Login" class="btn btn-primary" />
+    <br />
+    <br />
+    <div class="text-danger">
+        @ViewBag.Message
+    </div>
+
+
+}
+

@@ -1,0 +1,21 @@
+﻿
+
+@{
+    ViewBag.Title = "Refer";
+
+}
+
+<h2>Refer</h2>
+
+@using (Html.BeginForm("Assign", "Home"))
+{
+    @Html.DropDownList("Employees", ViewBag.Employees as SelectList, "", htmlAttributes: new { @class = "form-control" })
+    <br />
+    @Html.Hidden("id", ViewBag.AssignmentID as string)
+    @Html.Hidden("email", ViewBag.Referer as string)
+    <input type="submit" value="Assign" class="btn btn-primary form-control" />
+
+}
+
+
+
